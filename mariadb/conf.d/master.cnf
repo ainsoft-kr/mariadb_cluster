@@ -1,0 +1,35 @@
+
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server           = utf8mb4
+collation-server               = utf8mb4_unicode_ci
+
+init-connect=SET NAMES 'utf8mb4'
+init-connect=SET collation_connection='utf8mb4_unicode_ci'
+
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+innodb_file_per_table
+
+server-id=1
+binlog_do_db=data1
+
+# Row format required for ZongJi
+binlog_format    = row
+# Directory must exist. This path works for Linux. Other OS may require
+#   different path.
+log_bin          = /var/log/mysql/mysql-bin.log
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
