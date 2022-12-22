@@ -23,22 +23,22 @@ clear-data:
 	done
 
 build:
-	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml build
+	docker compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml build
 
 up:
-	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml up -d
+	docker compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml up -d
 
 down:
-	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml down
+	docker compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml down
 
 ps:
-	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml ps
+	docker compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml ps
 
 rm:
-	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml rm
+	docker compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml rm
 
 conf:
-	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml config
+	docker compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml config
 
 logs:
 	docker-compose -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml logs $(name)
