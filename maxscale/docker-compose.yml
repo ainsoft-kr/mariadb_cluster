@@ -4,21 +4,17 @@ version: '3.7'
 # Define services
 services:
   maxscale:
-    image: mariadb/maxscale:2.4
+    image: mariadb/maxscale:22.08
     volumes:
       - ./maxscale.cnf.d:/etc/maxscale.cnf.d
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
-      - backend
+      - maxscale_network
     ports:
       - "4006:4006"  # readwrite port
       - "4008:4008"  # readonly port
       - "8989:8989"  # REST API port
-       
-# Volumes
-volumes:
-  khealth-data:
 
 # Networks to be created to facilitate communication between containers
 networks:
-  backend:
-    name: maxscale_network
+  maxscale_network:
+

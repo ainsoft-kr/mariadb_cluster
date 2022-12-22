@@ -1,7 +1,7 @@
 version: '2'
 services:
     master:
-        image: mariadb:10.3
+        image: mariadb:10.5
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'Y'
         volumes:
@@ -11,7 +11,7 @@ services:
             - "4001:3306"
 
     slave1:
-        image: mariadb:10.3
+        image: mariadb:10.5
         depends_on:
             - master
         environment:
@@ -23,7 +23,7 @@ services:
             - "4002:3306"
 
     slave2:
-        image: mariadb:10.3
+        image: mariadb:10.5
         depends_on:
             - master
         environment:

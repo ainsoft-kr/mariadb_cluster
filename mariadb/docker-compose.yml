@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   master:
-    image: mariadb:10.6.4
+    image: mariadb:10.10
     env_file: env
     ports:
       - "4001:3306"
@@ -12,11 +12,11 @@ services:
       - ./data/master:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3000 --log-slave-updates
     networks:
-      - backend
+      - maxscale_network
     restart: on-failure
 
   slave1:
-    image: mariadb:10.6.4
+    image: mariadb:10.10
     env_file: env
     depends_on:
       - master
@@ -28,11 +28,11 @@ services:
       - ./data/slave1:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3001 --log-slave-updates
     networks:
-      - backend
+      - maxscale_network
     restart: on-failure
 
   slave2:
-    image: mariadb:10.6.4
+    image: mariadb:10.10
     env_file: env
     depends_on:
       - master
@@ -44,9 +44,9 @@ services:
       - ./data/slave2:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3002 --log-slave-updates
     networks:
-      - backend
+      - maxscale_network
     restart: on-failure
 
 networks:
-  backend:
+  maxscale_network:
 
