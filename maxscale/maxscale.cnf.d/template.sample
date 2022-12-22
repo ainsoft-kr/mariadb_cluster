@@ -1,0 +1,100 @@
+[master]
+type=server
+address=10.41.229.172
+port=4001
+protocol=MariaDBBackend
+
+[slave1]
+type=server
+address=10.41.229.172
+port=4002
+protocol=MariaDBBackend
+
+[slave2]
+type=server
+address=10.41.229.172
+port=4003
+protocol=MariaDBBackend
+
+# Monitor for the servers
+# This will keep MaxScale aware of the state of the servers.
+# MySQL Monitor documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Monitors/MariaDB-Monitor.md
+
+[MariaDB-Monitor]
+type=monitor
+module=mariadbmon
+servers=master,slave1,slave2
+user=root
+password=WK+v5c8VVh2tp)%p
+failcount=3
+backend_connect_timeout=3
+backend_write_timeout=3
+backend_read_timeout=3
+auto_failover=true
+auto_rejoin=true
+enforce_read_only_slaves=1
+
+# Service definitions
+# Service Definition for a read-only service and a read/write splitting service.
+
+# [Galera-Monitor]
+# type=monitor
+# module=galeramon
+# servers=master,slave1,slave2
+# user=root
+# password=WK+v5c8VVh2tp)%p
+# monitor_interval=5000
+
+# ReadConnRoute documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Routers/ReadConnRoute.md
+
+[Read-Only-Service]
+type=service
+router=readconnroute
+servers=master,slave1,slave2
+user=root
+password=WK+v5c8VVh2tp)%p
+router_options=slave
+
+# ReadWriteSplit documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Routers/ReadWriteSplit.md
+
+[Read-Write-Service]
+type=service
+router=readwritesplit
+servers=master,slave1,slave2
+user=root
+password=WK+v5c8VVh2tp)%p
+master_failure_mode=fail_on_write
+
+[CLI]
+type=service
+router=cli
+
+[CLI-Listener]
+type=listener
+service=CLI
+protocol=maxscaled
+address=localhost
+port=6603
+
+
+# Listener definitions for the services
+# Listeners represent the ports the services will listen on.
+
+[Read-Only-Listener]
+type=listener
+service=Read-Only-Service
+protocol=MariaDBClient
+# protocol=MariaDBBackend
+port=4008
+
+[Read-Write-Listener]
+type=listener
+service=Read-Write-Service
+protocol=MariaDBClient
+# protocol=MariaDBBackend
+port=4006
+
+
