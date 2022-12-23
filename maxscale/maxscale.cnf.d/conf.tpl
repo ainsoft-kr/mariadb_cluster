@@ -84,9 +84,9 @@ user=${MASTER_USER}
 password=${MASTER_ROOT_PASSWORD}
 master_failure_mode=fail_on_write
 
-[CLI-Service]
-type=service
-router=cli
+# [CLI-Service]
+# type=service
+# router=cli
 
 
 # Listener definitions for the services
@@ -104,8 +104,8 @@ service=Read-Write-Service
 protocol=MariaDBClient
 port=4006
 
-[CLI-Listener]
-type=listener
-service=CLI-Service
-protocol=maxscaled
-port=4009
+# [CLI-Listener]
+# type=listener
+# service=CLI-Service
+# protocol=maxscaled
+# port=4009
