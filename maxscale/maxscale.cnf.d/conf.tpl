@@ -15,19 +15,19 @@ threads=auto
 [master]
 type=server
 address=${MASTER_IP_ADDRESS}
-port=4001
+port=${MASTER_IP_PORT}
 protocol=MariaDBBackend
 
 [slave1]
 type=server
 address=${SLAVE1_IP_ADDRESS}
-port=4002
+port=${SLAVE1_IP_PORT}
 protocol=MariaDBBackend
 
 [slave2]
 type=server
 address=${SLAVE2_IP_ADDRESS}
-port=4003
+port=${SLAVE2_IP_PORT}
 protocol=MariaDBBackend
 
 # Monitor for the servers
@@ -49,9 +49,6 @@ auto_failover=true
 auto_rejoin=true
 enforce_read_only_slaves=1
 
-# Service definitions
-# Service Definition for a read-only service and a read/write splitting service.
-
 [Galera-Monitor]
 type=monitor
 module=galeramon
@@ -60,6 +57,10 @@ servers=master,slave1,slave2
 user=${MASTER_USER}
 password=${MASTER_ROOT_PASSWORD}
 monitor_interval=5000
+
+
+# Service definitions
+# Service Definition for a read-only service and a read/write splitting service.
 
 # ReadConnRoute documentation:
 # https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Routers/ReadConnRoute.md
@@ -95,14 +96,12 @@ router=cli
 type=listener
 service=Read-Only-Service
 protocol=MariaDBClient
-# protocol=MariaDBBackend
 port=4008
 
 [Read-Write-Listener]
 type=listener
 service=Read-Write-Service
 protocol=MariaDBClient
-# protocol=MariaDBBackend
 port=4006
 
 [CLI-Listener]
