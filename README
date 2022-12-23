@@ -1,4 +1,17 @@
 
-# How to setup
+# Mariadb cluster Setup
 
-## 
+## How to setup
+
+
+### Creating data directory for mariadb cluster
+
+```sh
+make init
+```
+
+### Creating initdb.sql file from initdb.tpl by combining with environemnt variables
+
+```sh
+make initdb
+```

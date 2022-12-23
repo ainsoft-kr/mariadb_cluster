@@ -1,18 +1,18 @@
 [master]
 type=server
-address=10.41.229.172
+address=${MASTER_IP_ADDRESS}
 port=4001
 protocol=MariaDBBackend
 
 [slave1]
 type=server
-address=10.41.229.172
+address=${SLAVE1_IP_ADDRESS}
 port=4002
 protocol=MariaDBBackend
 
 [slave2]
 type=server
-address=10.41.229.172
+address=${SLAVE2_IP_ADDRESS}
 port=4003
 protocol=MariaDBBackend
 
@@ -25,8 +25,8 @@ protocol=MariaDBBackend
 type=monitor
 module=mariadbmon
 servers=master,slave1,slave2
-user=root
-password=WK+v5c8VVh2tp)%p
+user=${MASTER_USER}
+password=${MASTER_ROOT_PASSWORD}
 failcount=3
 backend_connect_timeout=3
 backend_write_timeout=3
@@ -42,8 +42,8 @@ enforce_read_only_slaves=1
 # type=monitor
 # module=galeramon
 # servers=master,slave1,slave2
-# user=root
-# password=WK+v5c8VVh2tp)%p
+# user=${MASTER_USER}
+# password=${MASTER_ROOT_PASSWORD}
 # monitor_interval=5000
 
 # ReadConnRoute documentation:
@@ -53,8 +53,8 @@ enforce_read_only_slaves=1
 type=service
 router=readconnroute
 servers=master,slave1,slave2
-user=root
-password=WK+v5c8VVh2tp)%p
+user=${MASTER_USER}
+password=${MASTER_ROOT_PASSWORD}
 router_options=slave
 
 # ReadWriteSplit documentation:
@@ -64,8 +64,8 @@ router_options=slave
 type=service
 router=readwritesplit
 servers=master,slave1,slave2
-user=root
-password=WK+v5c8VVh2tp)%p
+user=${MASTER_USER}
+password=${MASTER_ROOT_PASSWORD}
 master_failure_mode=fail_on_write
 
 [CLI]

@@ -5,3 +5,8 @@ mariadb/env
 mariadb/data/
 
 maxscale/maxscale.cnf.d/jungto.cnf
+
+mariadb/initdb.d/sql/master/*.sql
+mariadb/initdb.d/sql/slave/*.sql
+
+maxscale/maxscale.cnf.d/*.cnf
