@@ -1,3 +1,17 @@
+# Global parameters
+#
+# Complete list of configuration options:
+# https://mariadb.com/kb/en/mariadb-maxscale-24-mariadb-maxscale-configuration-guide/
+
+[maxscale]
+threads=auto
+
+# Server definitions
+#
+# Set the address of the server to the network
+# address of a MariaDB server.
+#
+
 [master]
 type=server
 address=${MASTER_IP_ADDRESS}
@@ -38,13 +52,14 @@ enforce_read_only_slaves=1
 # Service definitions
 # Service Definition for a read-only service and a read/write splitting service.
 
-# [Galera-Monitor]
-# type=monitor
-# module=galeramon
-# servers=master,slave1,slave2
-# user=${MASTER_USER}
-# password=${MASTER_ROOT_PASSWORD}
-# monitor_interval=5000
+[Galera-Monitor]
+type=monitor
+module=galeramon
+disable_master_failback=1
+servers=master,slave1,slave2
+user=${MASTER_USER}
+password=${MASTER_ROOT_PASSWORD}
+monitor_interval=5000
 
 # ReadConnRoute documentation:
 # https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Routers/ReadConnRoute.md
@@ -68,16 +83,9 @@ user=${MASTER_USER}
 password=${MASTER_ROOT_PASSWORD}
 master_failure_mode=fail_on_write
 
-[CLI]
+[CLI-Service]
 type=service
 router=cli
-
-[CLI-Listener]
-type=listener
-service=CLI
-protocol=maxscaled
-address=localhost
-port=6603
 
 
 # Listener definitions for the services
@@ -97,4 +105,8 @@ protocol=MariaDBClient
 # protocol=MariaDBBackend
 port=4006
 
-
+[CLI-Listener]
+type=listener
+service=CLI-Service
+protocol=maxscaled
+port=4009
