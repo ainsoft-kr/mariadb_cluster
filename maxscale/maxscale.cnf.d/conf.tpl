@@ -3,8 +3,8 @@
 # Complete list of configuration options:
 # https://mariadb.com/kb/en/mariadb-maxscale-24-mariadb-maxscale-configuration-guide/
 
-[maxscale]
-threads=auto
+# [maxscale]
+# threads=auto
 
 # Server definitions
 #
@@ -49,14 +49,14 @@ auto_failover=true
 auto_rejoin=true
 enforce_read_only_slaves=1
 
-[Galera-Monitor]
-type=monitor
-module=galeramon
-disable_master_failback=1
-servers=master,slave1,slave2
-user=${MASTER_USER}
-password=${MASTER_ROOT_PASSWORD}
-monitor_interval=5000
+# [Galera-Monitor]
+# type=monitor
+# module=galeramon
+# disable_master_failback=1
+# servers=master,slave1,slave2
+# user=${MASTER_USER}
+# password=${MASTER_ROOT_PASSWORD}
+# monitor_interval=5000ms
 
 
 # Service definitions

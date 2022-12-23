@@ -23,5 +23,4 @@ GRANT ALL ON *.* TO '${MASTER_USER}'@'%' WITH GRANT OPTION;
 -- GRANT ALL PRIVILEGES ON testdb.* TO 'testdb_user'@'%' IDENTIFIED BY 'test_password';
 -- GRANT ALL PRIVILEGES ON testdb.* TO 'testdb_user'@'localhost' IDENTIFIED BY 'test_password';
 
--- flush privileges;
 FLUSH PRIVILEGES;
