@@ -39,9 +39,9 @@ services:
     ports:
       - "4003:3306"
     volumes:
-      - ./conf.d/slave2.cnf:/etc/mysql/conf.d/my.cnf
-      - ./initdb.d/sql/slave:/docker-entrypoint-initdb.d
-      - ./data/slave2:/var/lib/mysql:rw
+      - ${ROOT_PROJECT_PATH:-.}/conf.d/slave2.cnf:/etc/mysql/conf.d/my.cnf
+      - ${ROOT_PROJECT_PATH:-.}/initdb.d/sql/slave:/docker-entrypoint-initdb.d
+      - ${ROOT_PROJECT_PATH:-.}/data/slave2:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3002 --log-slave-updates
     networks:
       - maxscale_network
