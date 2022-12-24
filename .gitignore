@@ -1,7 +1,4 @@
 
-
-mariadb/env
-
 mariadb/data/
 
 mariadb/initdb.d/sql/master/*.sql

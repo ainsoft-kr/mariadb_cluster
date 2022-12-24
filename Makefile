@@ -36,22 +36,44 @@ clear-data:
 	done
 
 build:
-	docker compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml build
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml build
 
 up:
-	docker compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml up -d
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml up -d
 
 down:
-	docker compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml down
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml down
 
 ps:
-	docker compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml ps
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml ps
 
 rm:
-	docker compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml rm
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml rm
 
 conf:
-	docker compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml config
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml config
 
 logs:
-	docker-compose --env-file env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml logs $(name)
+	docker-compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml logs $(name)
+
+
+dev-build:
+	docker compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml build
+
+dev-up:
+	docker compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml up -d
+
+dev-down:
+	docker compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml down
+
+dev-ps:
+	docker compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml ps
+
+dev-rm:
+	docker compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml rm
+
+dev-conf:
+	docker compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml config
+
+dev-logs:
+	docker-compose --env-file ./env/docker/dev_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml logs $(name)

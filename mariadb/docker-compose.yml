@@ -1,11 +1,12 @@
 
 version: '3.7'
+
 services:
   master:
     image: mariadb:10.10
-    env_file: env
+    env_file: ${MARIADB_PATH:-.}/env/mariadb/prod_env
     ports:
-      - "4001:3306"
+      - "127.0.0.1:4001:3306"
     volumes:
       - ${MARIADB_PATH:-.}/conf.d/master.cnf:/etc/mysql/conf.d/my.cnf
       - ${MARIADB_PATH:-.}/initdb.d/sql/master:/docker-entrypoint-initdb.d
@@ -17,11 +18,11 @@ services:
 
   slave1:
     image: mariadb:10.10
-    env_file: env
+    env_file: ${MARIADB_PATH:-.}/env/mariadb/prod_env
     depends_on:
       - master
     ports:
-      - "4002:3306"
+      - "127.0.0.1:4002:3306"
     volumes:
       - ${MARIADB_PATH:-.}/conf.d/slave1.cnf:/etc/mysql/conf.d/my.cnf
       - ${MARIADB_PATH:-.}/initdb.d/sql/slave:/docker-entrypoint-initdb.d
@@ -33,11 +34,11 @@ services:
 
   slave2:
     image: mariadb:10.10
-    env_file: env
+    env_file: ${MARIADB_PATH:-.}/env/mariadb/prod_env
     depends_on:
       - master
     ports:
-      - "4003:3306"
+      - "127.0.0.1:4003:3306"
     volumes:
       - ${MARIADB_PATH:-.}/conf.d/slave2.cnf:/etc/mysql/conf.d/my.cnf
       - ${MARIADB_PATH:-.}/initdb.d/sql/slave:/docker-entrypoint-initdb.d
