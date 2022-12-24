@@ -39,8 +39,8 @@ protocol=MariaDBBackend
 type=monitor
 module=mariadbmon
 servers=master,slave1,slave2
-user=${MASTER_USER}
-password=${MASTER_ROOT_PASSWORD}
+user=root
+password=${MARIADB_ROOT_PASSWORD}
 failcount=3
 backend_connect_timeout=3s
 backend_write_timeout=3s
@@ -54,8 +54,8 @@ enforce_read_only_slaves=1
 # module=galeramon
 # disable_master_failback=1
 # servers=master,slave1,slave2
-# user=${MASTER_USER}
-# password=${MASTER_ROOT_PASSWORD}
+# user=root
+# password=${MARIADB_ROOT_PASSWORD}
 # monitor_interval=5000ms
 
 
@@ -69,8 +69,8 @@ enforce_read_only_slaves=1
 type=service
 router=readconnroute
 servers=master,slave1,slave2
-user=${MASTER_USER}
-password=${MASTER_ROOT_PASSWORD}
+user=root
+password=${MARIADB_ROOT_PASSWORD}
 router_options=slave
 
 # ReadWriteSplit documentation:
@@ -80,8 +80,8 @@ router_options=slave
 type=service
 router=readwritesplit
 servers=master,slave1,slave2
-user=${MASTER_USER}
-password=${MASTER_ROOT_PASSWORD}
+user=root
+password=${MARIADB_ROOT_PASSWORD}
 master_failure_mode=fail_on_write
 
 # [CLI-Service]

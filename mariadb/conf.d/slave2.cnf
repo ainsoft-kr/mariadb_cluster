@@ -20,7 +20,7 @@ user=mysql
 symbolic-links=0
 innodb_file_per_table
 
-server-id=3
+server-id=2
 replicate-do-db=data1
 
 # Row format required for ZongJi
