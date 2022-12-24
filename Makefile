@@ -14,16 +14,15 @@ init-data:
 		fi ; \
 	done
 
-init-conf:
-	if test -f ./mariadb/env; then \
-		echo "The env file is existing!" ; \
-	else \
-		cp ./mariadb/env.sample ./mariadb/env ; \
-		echo "The env file is created! set the value for variables" ; \
-	fi ; \
-	bash -c 'set -o allexport; source ./mariadb/env; envsubst < ./mariadb/initdb.d/sql/master/initdb.tpl > ./mariadb/initdb.d/sql/master/initdb.sql'
-	bash -c 'set -o allexport; source ./mariadb/env; envsubst < ./mariadb/initdb.d/sql/slave/replication.tpl > ./mariadb/initdb.d/sql/slave/replication.sql'
-	bash -c 'set -o allexport; source ./mariadb/env; envsubst < ./maxscale/maxscale.cnf.d/conf.tpl > ./maxscale/maxscale.cnf.d/jungto.cnf'
+init-dev-conf:
+	bash -c 'set -o allexport; source ./env/mariadb/dev_env; envsubst < ./mariadb/initdb.d/sql/master/initdb.tpl > ./mariadb/initdb.d/sql/master/initdb.sql'
+	bash -c 'set -o allexport; source ./env/mariadb/dev_env; envsubst < ./mariadb/initdb.d/sql/slave/replication.tpl > ./mariadb/initdb.d/sql/slave/replication.sql'
+	bash -c 'set -o allexport; source ./env/mariadb/dev_env; envsubst < ./maxscale/maxscale.cnf.d/conf.tpl > ./maxscale/maxscale.cnf.d/jungto.cnf'
+
+init-prod-conf:
+	bash -c 'set -o allexport; source ./env/mariadb/prod_env; envsubst < ./mariadb/initdb.d/sql/master/initdb.tpl > ./mariadb/initdb.d/sql/master/initdb.sql'
+	bash -c 'set -o allexport; source ./env/mariadb/prod_env; envsubst < ./mariadb/initdb.d/sql/slave/replication.tpl > ./mariadb/initdb.d/sql/slave/replication.sql'
+	bash -c 'set -o allexport; source ./env/mariadb/prod_env; envsubst < ./maxscale/maxscale.cnf.d/conf.tpl > ./maxscale/maxscale.cnf.d/jungto.cnf'
 
 clear-data:
 	for name in $(DATA_LIST); do \
