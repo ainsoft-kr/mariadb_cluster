@@ -39,15 +39,24 @@ protocol=MariaDBBackend
 type=monitor
 module=mariadbmon
 servers=master,slave1,slave2
+disk_space_check_interval=1000
+disk_space_threshold=/:85
+detect_replication_lag=true
+enforce_read_only_slaves=true
+failcount=3
+auto_failover=1
+auto_rejoin=true
+monitor_interval=300
 user=root
 password=${MARIADB_ROOT_PASSWORD}
-failcount=3
 backend_connect_timeout=3s
 backend_write_timeout=3s
 backend_read_timeout=3s
 auto_failover=true
 auto_rejoin=true
-enforce_read_only_slaves=0
+# replication_password=5349E1268CC4AF42B919A42C8E52D185
+# replication_user=rpl_user
+
 
 # [Galera-Monitor]
 # type=monitor
