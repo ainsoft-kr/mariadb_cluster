@@ -4,7 +4,7 @@ version: '3.7'
 services:
   master:
     image: mariadb:10.10
-    env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/dev_env
+    env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/prod_env
     ports:
       - "127.0.0.1:4001:3306"
     volumes:
@@ -18,7 +18,7 @@ services:
 
   slave1:
     image: mariadb:10.10
-    env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/dev_env
+    env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/prod_env
     depends_on:
       - master
     ports:
@@ -34,7 +34,7 @@ services:
 
   slave2:
     image: mariadb:10.10
-    env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/dev_env
+    env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/prod_env
     depends_on:
       - master
     ports:

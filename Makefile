@@ -35,25 +35,25 @@ clear-data:
 	done
 
 build:
-	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml build
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml build
 
 up:
-	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml up -d
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml up -d
 
 down:
-	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml down
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml down
 
 ps:
-	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml ps
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml ps
 
 rm:
-	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml rm
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml rm
 
 conf:
-	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml config
+	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml config
 
 logs:
-	docker-compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.yml -f ./maxscale/docker-compose.yml logs $(name)
+	docker-compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml logs $(name)
 
 
 dev-build:
