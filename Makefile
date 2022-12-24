@@ -1,8 +1,10 @@
 DATA_LIST = master slave1 slave2
 
-.PHONY: init-data init-conf clear-data build
+.PHONY: init-data init-dev-conf clear-data build
 
-init: init-data init-conf clear-data
+init: init-data init-prod-conf clear-data
+
+init-dev: init-data init-dev-conf clear-data
 
 init-data:
 	for name in $(DATA_LIST); do \
