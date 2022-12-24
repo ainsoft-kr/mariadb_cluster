@@ -47,7 +47,7 @@ backend_write_timeout=3s
 backend_read_timeout=3s
 auto_failover=true
 auto_rejoin=true
-enforce_read_only_slaves=1
+enforce_read_only_slaves=0
 
 # [Galera-Monitor]
 # type=monitor
@@ -96,12 +96,14 @@ master_failure_mode=fail_on_write
 type=listener
 service=Read-Only-Service
 protocol=MariaDBClient
+address=maxscale
 port=4008
 
 [Read-Write-Listener]
 type=listener
 service=Read-Write-Service
 protocol=MariaDBClient
+address=maxscale
 port=4006
 
 # [CLI-Listener]
