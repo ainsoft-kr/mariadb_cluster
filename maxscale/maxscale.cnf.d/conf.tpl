@@ -91,13 +91,13 @@ password=${MARIADB_ROOT_PASSWORD}
 max_slave_connections       = 255
 max_sescmd_history          = 1500
 causal_reads                = true
-causal_reads_timeout        = 10
+causal_reads_timeout        = 10s
 transaction_replay          = true
 transaction_replay_max_size = 1Mi
 delayed_retry               = true
 master_reconnection         = true
 master_failure_mode         = fail_on_write
-max_slave_replication_lag   = 3
+max_slave_replication_lag   = 3s
 
 # [CLI-Service]
 # type=service
