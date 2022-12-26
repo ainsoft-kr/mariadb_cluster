@@ -13,25 +13,67 @@ collation-server               = utf8mb4_unicode_ci
 init-connect=SET NAMES 'utf8mb4'
 init-connect=SET collation_connection='utf8mb4_unicode_ci'
 
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
 user=mysql
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
+symbolic-links          = 0 # Disabling symbolic-links is recommended to prevent assorted security risks
 innodb_file_per_table
 
-server-id=2
-# master-host = 202.*.*.*
-# master-user = replicationUser1
-# master-password = ********
-# master-port = 3306
-replicate-do-db=data1
+# Network
+port = 3306
+socket = /var/lib/mysql/mysql.sock
+bind-address = 0.0.0.0
 
-# Row format required for ZongJi
-binlog_format    = row
-# Directory must exist. This path works for Linux. Other OS may require
-#   different path.
-log_bin          = /var/log/mysql/mysql-bin.log
+# Data directory
+basedir = /usr
+datadir = /var/lib/mysql
+tmpdir = /tmp
+
+# Connections
+max_connections         = 100
+connect_timeout         = 5
+wait_timeout            = 600
+max_allowed_packet      = 16M
+thread_cache_size       = 128
+sort_buffer_size        = 4M
+bulk_insert_buffer_size = 16M
+tmp_table_size          = 32M
+
+# Query Cache
+query_cache_limit       = 128K
+query_cache_size        = 64M
+query_cache_type        = 1
+log_warnings            = 2
+
+# Slow log
+slow_query_log
+slow_query_log_file     = /var/lib/mysql/mariadb-slow.log
+long_query_time         = 1
+log_slow_verbosity      = query_plan,explain
+
+# Replication
+server-id                   = 2
+gtid_strict_mode            = 1
+log-bin                     = /var/lib/mysql/bin-mariadb.log    # Directory must exist. This path works for Linux. Other OS may require
+expire-logs-days            = 8
+sync_binlog                 = 1
+slave_compressed_protocol
+transaction-isolation       = READ-COMMITTED
+binlog_format               = row
+
+# Error log
+log_error = mariadb_error.log
+
+# Deadlocks
+innodb_print_all_deadlocks = ON
+
+# Performance Schema
+performance_schema=on
+
+# User Statistics
+userstat = 1
+
+# Denies naming the connection
+skip_name_resolve
+
 
 [mysqld_safe]
 log-error=/var/log/mysqld.log
