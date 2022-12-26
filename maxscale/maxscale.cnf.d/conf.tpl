@@ -47,7 +47,6 @@ auto_failover=1
 auto_rejoin=true
 monitor_interval=5000ms
 events=master_down
-detect_replication_lag=true
 user=root
 password=${MARIADB_ROOT_PASSWORD}
 backend_connect_timeout=3s
