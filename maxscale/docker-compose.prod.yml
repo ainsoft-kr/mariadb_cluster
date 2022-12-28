@@ -9,6 +9,13 @@ services:
       - ${MAXSCALE_PATH:-.}/maxscale.cnf.d:/etc/maxscale.cnf.d
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - maxscale_network
+    depends_on:
+      master:
+        condition: service_healthy
+      slave1:
+        condition: service_healthy
+      slave2:
+        condition: service_healthy
     ports:
       - "4006:4006"  # readwrite port
       - "4008:4008"  # readonly port

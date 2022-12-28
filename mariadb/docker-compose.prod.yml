@@ -12,6 +12,11 @@ services:
       - ${MARIADB_PATH:-.}/initdb.d/sql/master:/docker-entrypoint-initdb.d
       - ${MARIADB_PATH:-.}/data/master:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3000 --log-slave-updates
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', '--host=master', '--user=root', '--password=${MARIADB_ROOT_PASSWORD:-.}', 'ping' ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     networks:
       - maxscale_network
     restart: on-failure
@@ -20,7 +25,8 @@ services:
     image: mariadb:10.10
     env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/prod_env
     depends_on:
-      - master
+      master:
+        condition: service_healthy
     ports:
       - "127.0.0.1:4002:3306"
     volumes:
@@ -28,6 +34,11 @@ services:
       - ${MARIADB_PATH:-.}/initdb.d/sql/slave:/docker-entrypoint-initdb.d
       - ${MARIADB_PATH:-.}/data/slave1:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3001 --log-slave-updates
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', '--host=slave1', '--user=root', '--password=${MARIADB_ROOT_PASSWORD:-.}', 'ping' ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     networks:
       - maxscale_network
     restart: on-failure
@@ -36,7 +47,8 @@ services:
     image: mariadb:10.10
     env_file: ${ROOT_PROJECT_PATH:-.}/env/mariadb/prod_env
     depends_on:
-      - master
+      master:
+        condition: service_healthy
     ports:
       - "127.0.0.1:4003:3306"
     volumes:
@@ -44,6 +56,11 @@ services:
       - ${MARIADB_PATH:-.}/initdb.d/sql/slave:/docker-entrypoint-initdb.d
       - ${MARIADB_PATH:-.}/data/slave2:/var/lib/mysql:rw
     # command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3002 --log-slave-updates
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', '--host=slave2', '--user=root', '--password=${MARIADB_ROOT_PASSWORD:-.}', 'ping' ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     networks:
       - maxscale_network
     restart: on-failure

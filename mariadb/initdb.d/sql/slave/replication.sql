@@ -1,9 +1,21 @@
 
 RESET MASTER;
 
-SET GLOBAL max_connections=1000;
-SET GLOBAL gtid_strict_mode=ON;
+SET GLOBAL max_connections = 1000;
+SET GLOBAL gtid_strict_mode = ON;
+SET GLOBAL gtid_slave_pos = '';
 
-CHANGE MASTER TO MASTER_HOST='master', MASTER_PORT=3306, MASTER_USER='root', MASTER_PASSWORD='^qT%XAR%Vzv6gI7V', MASTER_USE_GTID=slave_pos;
+-- INSTALL PLUGIN IF NOT EXISTS disks SONAME 'disks';
+
+CHANGE MASTER TO MASTER_HOST='master', MASTER_PORT=3306, MASTER_USER='root', MASTER_PASSWORD='1', MASTER_USE_GTID=slave_pos;
 
 START SLAVE;
+
+
+-- CREATE USER 'maxroot'@'127.0.0.1' IDENTIFIED BY '1';
+-- CREATE USER 'maxroot'@'%' IDENTIFIED BY '1';
+
+-- GRANT ALL ON *.* TO 'maxroot'@'127.0.0.1' WITH GRANT OPTION;
+-- GRANT ALL ON *.* TO 'maxroot'@'%' WITH GRANT OPTION;
+
+-- FLUSH PRIVILEGES;
