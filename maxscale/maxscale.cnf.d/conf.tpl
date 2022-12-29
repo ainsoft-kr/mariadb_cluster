@@ -111,14 +111,14 @@ type=listener
 service=Read-Only-Service
 protocol=MariaDBClient
 address=maxscale
-port=4008
+port=4308
 
 [Read-Write-Listener]
 type=listener
 service=Read-Write-Service
 protocol=MariaDBClient
 address=maxscale
-port=4006
+port=4306
 
 # [CLI-Listener]
 # type=listener
