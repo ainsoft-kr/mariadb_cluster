@@ -18,7 +18,7 @@ services:
       timeout: 10s
       retries: 5
     networks:
-      - maxscale_network
+      - jts-network
     restart: on-failure
 
   slave1:
@@ -40,7 +40,7 @@ services:
       timeout: 10s
       retries: 5
     networks:
-      - maxscale_network
+      - jts-network
     restart: on-failure
 
   slave2:
@@ -62,9 +62,11 @@ services:
       timeout: 10s
       retries: 5
     networks:
-      - maxscale_network
+      - jts-network
     restart: on-failure
 
 networks:
-  maxscale_network:
+  # maxscale_network:
+  jts-network:
+    external: true
 

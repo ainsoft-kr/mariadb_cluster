@@ -8,7 +8,7 @@ services:
     volumes:
       - ${MAXSCALE_PATH:-.}/maxscale.cnf.d:/etc/maxscale.cnf.d
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
-      - maxscale_network
+      - jts-network
     depends_on:
       master:
         condition: service_healthy
@@ -24,5 +24,7 @@ services:
 
 # Networks to be created to facilitate communication between containers
 networks:
-  maxscale_network:
+  # maxscale_network:
+  jts-network:
+    external: true
 
