@@ -1,10 +1,10 @@
 DATA_LIST = master slave1 slave2
 
-.PHONY: init-data init-dev-conf clear-data build
+.PHONY: create-network init-data init-dev-conf clear-data build
 
-init: init-data init-prod-conf clear-data
+init: init-data init-prod-conf clear-data create-network
 
-init-dev: init-data init-dev-conf clear-data
+init-dev: init-data init-dev-conf clear-data create-network
 
 init-data:
 	for name in $(DATA_LIST); do \
@@ -35,6 +35,9 @@ clear-data:
 			echo "The directory does not contain any data : $$name" ; \
 		fi ; \
 	done
+
+create-network:
+	docker network create jts-network
 
 build:
 	docker compose --env-file ./env/docker/prod_env -f ./mariadb/docker-compose.prod.yml -f ./maxscale/docker-compose.prod.yml build
