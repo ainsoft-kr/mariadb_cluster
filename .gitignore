@@ -1,4 +1,6 @@
 
+db-backups/
+
 mariadb/data/
 
 mariadb/initdb.d/sql/master/*.sql
